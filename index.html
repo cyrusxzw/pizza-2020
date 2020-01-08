@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pizza Creator</title>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .section {
+            padding: 2rem;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 1rem;
+        }
+
+        .form-control {
+            display: grid;
+            grid-gap: 0.5rem;
+        }
+
+        .form-control > label {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .form-control > input {
+            height: 2.5rem;
+            outline: none;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+        }
+
+        .toppings {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1rem;
+        }
+
+        .topping {
+            border: 1px solid #000;
+            height: 2rem;
+            display: grid;
+            align-items: center;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: black;
+            background-color: white;
+        }
+
+        .topping:hover {
+            background-color: grey;
+            color: white;
+        }
+
+        .topping.active {
+            background-color: grey;
+            color: white;
+        }
+
+        .summary {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .summary > li {
+            display: grid;
+            grid-template-columns: 1fr auto;
+        }
+
+        .total {
+            text-align: right;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: green;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            text-align: center;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="section">
+        <h2>Enter your details</h2>
+        <div class="details">
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" name="" id="name">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" name="" id="email">
+            </div>
+            <div class="form-control">
+                <label for="confirm">Confirm</label>
+                <input type="text" name="" id="confirm">
+            </div>
+            <div class="form-control">
+                <label for="address">Address</label>
+                <input type="text" name="" id="address">
+            </div>
+            <div class="form-control">
+                <label for="postcode">Postcode</label>
+                <input type="text" name="" id="postcode">
+            </div>
+            <div class="form-control">
+                <label for="contact">Contact Number</label>
+                <input type="text" name="" id="contact">
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Pick your toppings</h2>
+        <div class="toppings">
+            <div class="topping">
+                <span>Anchovy</span>
+            </div>
+            <div class="topping">
+                <span>Bacon</span>
+            </div>
+            <div class="topping">
+                <span>Basil</span>
+            </div>
+            <div class="topping">
+                <span>Chili</span>
+            </div>
+            <div class="topping">
+                <span>Mozzarella</span>
+            </div>
+            <div class="topping">
+                <span>Mushroon</span>
+            </div>
+            <div class="topping">
+                <span>Olive</span>
+            </div>
+            <div class="topping">
+                <span>Onion</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Ordert Summary</h2>
+        <ul class="summary">
+            <li>
+                <span>Pizza</span>
+                <span>$9.99</span>
+            </li>
+        </ul>
+        <hr>
+        <div class="total">
+            Total: $10.00
+        </div>
+    </div>
+
+    <div class="section">
+        <button type="submit">Place order</button>
+    </div>
+    
+</body>
+</html>
