@@ -64,7 +64,9 @@ body {
 
 .summary > li {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto auto auto 1fr auto;
+    grid-gap: 0.5rem;
+    padding-top: 0.5rem;
 }
 
 .total {
