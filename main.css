@@ -83,3 +83,24 @@ button[type="submit"] {
     text-align: center;
     outline: none;
 }
+
+.modal {
+    padding: 2rem;;
+    position: fixed;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    height: 20rem;
+    width: 40rem;
+    background-color: #ffffff;
+    border: 2px solid #000;
+}
+
+.modal button {
+    margin-top: 3rem;
+    width: 4rem;
+    height: 2rem;
+    cursor: pointer;
+}

@@ -68,7 +68,7 @@ function main() {
 
                 newTotalValue = parseFloat(totalValue) + parseFloat(price);
             }
-
+            
             newTotalValue = newTotalValue.toFixed(2);
             total.dataset.total = newTotalValue;
             total.innerText = `$${newTotalValue}`;
