@@ -54,6 +54,18 @@
 
         window.onload = function() {
             //console.table(toppings);
+           render(state);
+
+           const submitBtn = document.querySelector('button[type = "submit"]');
+
+           submitBtn.onclick = () => {
+                state.isDisplayModal = true;
+                render(state);
+           }
+
+           }
+
+        function render(state) {
             renderToppings(state);
             renderSummary(state);
             renderTotal(state);
@@ -88,9 +100,7 @@
             const newselectedToppings = !selectedToppings.find(({ name }) => name === topping.name) ? [...selectedToppings, { ...topping, amount: 1 }] : selectedToppings.filter(({ name }) => name !== topping.name);
 
             state.selectedToppings = newselectedToppings;
-            renderToppings(state);
-            renderSummary(state);
-            renderTotal(state);
+            render(state);
         }
 
         function renderSummary(state) {
@@ -148,9 +158,7 @@
             });
 
             state.selectedToppings = newSelectedToppings;
-            renderToppings(state);
-            renderSummary(state);
-            renderTotal(state);
+            render(state);
         }
 
         function onMinusToppingClick(topping, state) {
@@ -175,9 +183,7 @@
             });
 
             state.selectedToppings = newSelectedToppings.filter(e=>!!e);
-            renderToppings(state);
-            renderSummary(state);
-            renderTotal(state);
+            render(state);
         }
 
         function renderTotal(state) {
@@ -196,7 +202,13 @@
 
         function renderConfirmationModal(state) {
             const { isDisplayModal } = state;
-            const parentNode = document.querySelector('.modal');
+            const parentNode = document.querySelector('.modalContainer');
+            clearNode(parentNode);
+            if(!isDisplayModal) {
+                return;
+            }
+            const modal = document.createElement('div');
+            modal.className = 'modal';
             const h1 = document.createElement('h1');
             h1.innerText = 'Order Confirmation';
             const div = document.createElement('div');
@@ -211,9 +223,15 @@
             totalPrice.innerText = '$100';
             const btn = document.createElement('button');
             btn.innerText = 'Cancel';
-            parentNode.append(h1, div, divTotal, btn);
+            parentNode.append(modal);
+            modal.append(h1, div, divTotal, btn);
             div.append(title, spanName);
             divTotal.append(spanTotal, totalPrice);
+
+            btn.onclick = () => {
+                state.isDisplayModal = false;
+                render(state);
+            }
         }
 
 
@@ -270,8 +288,7 @@
         <button type="submit">Place order</button>
     </div>
 
-    <div class="section">
-        <div class="modal"></div>
+    <div class="modalContainer">
     </div>
 
     
