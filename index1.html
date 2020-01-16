@@ -6,236 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pizza Creator</title>
     <link rel="stylesheet" href="./main.css">
-    <script>
-        const toppings = [
-            {
-                name: 'Anchovy',
-                price: 0.69
-            },
-            {
-                name: 'Bacon',
-                price: 0.69
-            },
-            {
-                name: 'Basil',
-                price: 0.69
-            },
-            {
-                name: 'Chili',
-                price: 0.69
-            },
-            {
-                name: 'Mozzarella',
-                price: 0.69
-            },
-            {
-                name: 'Mushroon',
-                price: 0.69
-            },
-            {
-                name: 'Olive',
-                price: 0.69
-            },
-            {
-                name: 'Onion',
-                price: 0.69
-            },
-        ]
-
-        let selectedToppings = [];
-
-        const state = {
-            toppings,
-            selectedToppings,
-            isDisplayModal : false,
-        }
-
-       //window.state = state;
-
-        window.onload = function() {
-            //console.table(toppings);
-           render(state);
-
-           const submitBtn = document.querySelector('button[type = "submit"]');
-
-           submitBtn.onclick = () => {
-                state.isDisplayModal = true;
-                render(state);
-           }
-
-           }
-
-        function render(state) {
-            renderToppings(state);
-            renderSummary(state);
-            renderTotal(state);
-            renderConfirmationModal(state);
-        }
-
-        function renderToppings(state) {
-            const parentNode = document.querySelector('.toppings');
-            const { toppings, selectedToppings } = state;
-            clearNode(parentNode);
-            toppings.forEach(topping => {
-                const { name } = topping;
-                const container = document.createElement('div');
-                container.className = "topping";
-                const spanName = document.createElement('span');
-                spanName.innerText = name;
-                container.append(spanName);
-                parentNode.append(container);
-
-                if(selectedToppings.find(({ name }) => name === topping.name)) {
-                    container.classList.add('active');
-                }
-
-                container.onclick = function () {
-                    onToppingClick(state, topping);
-                } 
-            })
-        }
-
-        function onToppingClick(state, topping) {
-            const { selectedToppings } = state;
-            const newselectedToppings = !selectedToppings.find(({ name }) => name === topping.name) ? [...selectedToppings, { ...topping, amount: 1 }] : selectedToppings.filter(({ name }) => name !== topping.name);
-
-            state.selectedToppings = newselectedToppings;
-            render(state);
-        }
-
-        function renderSummary(state) {
-           const { selectedToppings } = state;
-           const parentNode = document.querySelector('.summary');
-           clearNode(parentNode);
-           selectedToppings.forEach(selectedTopping => {
-
-                const { name, price, amount } = selectedTopping;
-                const li = document.createElement('li');
-                const spanName = document.createElement('span');
-                spanName.innerText = name;
-                const addBtn = document.createElement('button');
-                addBtn.innerText = '+';
-                const minusBtn = document.createElement('button');
-                minusBtn.innerText = '-';
-                const amountSpan = document.createElement('span');
-                amountSpan.innerText = `* ${amount}`;
-                const spanPrice = document.createElement('span');
-                const subTotal = (price * amount).toFixed(2);
-                spanPrice.innerText = `$${subTotal}`;
-                li.append(spanName, addBtn, minusBtn, amountSpan, spanPrice);
-                parentNode.append(li);
-
-                addBtn.onclick = function() {
-                    onAddToppingClick(selectedTopping, state);
-                }
-
-                minusBtn.onclick = () => {
-                    onMinusToppingClick(selectedTopping, state);
-                }
-                
-            })
-        }
-
-        function clearNode(parentNode) {
-            while(parentNode.firstChild){
-                parentNode.removeChild(parentNode.firstChild);
-            }
-        }
-
-        function onAddToppingClick(topping, state) {
-            const { selectedToppings } = state;
-            const newSelectedToppings = selectedToppings.map((selectedTopping) => {
-                const { name } = selectedTopping;
-                if(name === topping.name) {
-                    const { amount } = topping;
-                    return {
-                        ...topping,
-                        amount: amount + 1,
-                    }
-                }
-
-                return selectedTopping;
-            });
-
-            state.selectedToppings = newSelectedToppings;
-            render(state);
-        }
-
-        function onMinusToppingClick(topping, state) {
-            const { selectedToppings } = state;
-            const newSelectedToppings = selectedToppings.map((selectedTopping) => {
-                const { name } = selectedTopping;
-                if(name === topping.name) {
-                    const { amount } = topping;
-                    if(amount === 1){                  
-                        return undefined;
-                    }
-                    else {
-                        return {
-                        ...topping,
-                        amount: amount - 1,
-                        }
-                    }
-                   
-                }
-
-                return selectedTopping;
-            });
-
-            state.selectedToppings = newSelectedToppings.filter(e=>!!e);
-            render(state);
-        }
-
-        function renderTotal(state) {
-            const parentNode = document.querySelector('.total');
-            clearNode(parentNode);
-            const { selectedToppings } = state;
-            let total = 9.99;
-            selectedToppings.forEach(({ price, amount })=>{
-                const selectedToppingTotal = (price * amount).toFixed(2);
-                total += selectedToppingTotal;
-            })
-            const totalSpan = document.createElement('span');
-            parentNode.append(totalSpan);
-            totalSpan.innerText = `Total: $${total}`;
-        }
-
-        function renderConfirmationModal(state) {
-            const { isDisplayModal } = state;
-            const parentNode = document.querySelector('.modalContainer');
-            clearNode(parentNode);
-            if(!isDisplayModal) {
-                return;
-            }
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            const h1 = document.createElement('h1');
-            h1.innerText = 'Order Confirmation';
-            const div = document.createElement('div');
-            const title = document.createElement('span');
-            title.innerText = 'Name: ';
-            const spanName = document.createElement('span');
-            spanName.innerText = 'XZW';
-            const divTotal = document.createElement('div');
-            const spanTotal = document.createElement('span');
-            spanTotal.innerText = 'Total: ';
-            const totalPrice = document.createElement('span');
-            totalPrice.innerText = '$100';
-            const btn = document.createElement('button');
-            btn.innerText = 'Cancel';
-            parentNode.append(modal);
-            modal.append(h1, div, divTotal, btn);
-            div.append(title, spanName);
-            divTotal.append(spanTotal, totalPrice);
-
-            btn.onclick = () => {
-                state.isDisplayModal = false;
-                render(state);
-            }
-        }
-
-
-    </script>
+    <script src="./js/app.js"></script>
+    <script src="./js/render/renderToppings.js"></script>
+    <script src="./js/render/renderSummary.js"></script>
+    <script src="./js/render/renderTotal.js"></script>
+    <script src="./js/render/renderSizes.js"></script>
+    <script src="./js/render/renderConfirmationModal.js"></script>
 </head>
 <body>
     
@@ -270,13 +46,19 @@
     </div>
 
     <div class="section">
+        <h2>Pick pizza size</h2>
+        <div class="pizza-container">
+        </div>
+    </div>
+
+    <div class="section">
         <h2>Pick your toppings</h2>
         <div class="toppings">
         </div>
     </div>
 
     <div class="section">
-        <h2>Ordert Summary</h2>
+        <h2>Order Summary</h2>
         <ul class="summary">
         </ul>
         <hr>
