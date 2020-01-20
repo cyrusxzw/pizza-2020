@@ -1,3 +1,5 @@
+import render from './render';
+
 const toppings = [
     {
         name: 'Anchovy',
@@ -52,6 +54,7 @@ let selectedToppings = [];
 const state = {
     toppings,
     pizzas,
+    selectedPizza: null,
     selectedToppings,
     isDisplayModal : false,
 }
@@ -71,18 +74,14 @@ window.onload = function() {
 
    }
 
-function render(state) {
-    renderToppings(state);
-    renderSummary(state);
-    renderTotal(state);
-    renderConfirmationModal(state);
-    renderPizzaSize(state);
+function onToppingClick(topping) {
+    const { selectedToppings } = state;
+    const newselectedToppings = !selectedToppings.find(({ name }) => name === topping.name) ? [...selectedToppings, { ...topping, amount: 1 }] : selectedToppings.filter(({ name }) => name !== topping.name);
+
+    state.selectedToppings = newselectedToppings;
+    render(state);
 }
 
-function clearNode(parentNode) {
-    while(parentNode.firstChild){
-        parentNode.removeChild(parentNode.firstChild);
-    }
-}
-
+state.onToppingClick = onToppingClick;
+window.state = state;
 

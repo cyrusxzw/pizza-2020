@@ -1,6 +1,8 @@
-function renderToppings(state) {
+import clearNode from '../helper/clearNode';
+
+export default function renderToppings(state) {
     const parentNode = document.querySelector('.toppings');
-    const { toppings, selectedToppings } = state;
+    const { toppings, selectedToppings, onToppingClick } = state;
     clearNode(parentNode);
     toppings.forEach(topping => {
         const { name } = topping;
@@ -16,16 +18,7 @@ function renderToppings(state) {
         }
 
         container.onclick = function () {
-            onToppingClick(state, topping);
+            onToppingClick(topping);
         } 
     })
-}
-
-
-function onToppingClick(state, topping) {
-    const { selectedToppings } = state;
-    const newselectedToppings = !selectedToppings.find(({ name }) => name === topping.name) ? [...selectedToppings, { ...topping, amount: 1 }] : selectedToppings.filter(({ name }) => name !== topping.name);
-
-    state.selectedToppings = newselectedToppings;
-    render(state);
 }

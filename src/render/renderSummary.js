@@ -1,7 +1,27 @@
-function renderSummary(state) {
-    const { selectedToppings } = state;
+import clearNode from '../helper/clearNode';
+import render from '../render';
+
+export default function renderSummary(state) {
+    const { selectedToppings, selectedPizza } = state;
     const parentNode = document.querySelector('.summary');
     clearNode(parentNode);
+
+    if(selectedPizza) {
+        const pizzaSizeContainer = document.createElement('div');
+        const pizzaName = document.createElement('span');
+        const pizzaPrice = document.createElement('span');
+
+        const { size, price } = selectedPizza;
+
+        pizzaName.innerText = `${size}  `;
+        pizzaPrice.innerText = `$${price}`;
+
+        parentNode.append(pizzaSizeContainer);
+        pizzaSizeContainer.append(pizzaName, pizzaPrice);
+        
+    }
+
+
     selectedToppings.forEach(selectedTopping => {
  
          const { name, price, amount } = selectedTopping;
@@ -71,6 +91,6 @@ function onMinusToppingClick(topping, state) {
         return selectedTopping;
     });
 
-    state.selectedToppings = newSelectedToppings.filter(e=>!!e);
+    state.selectedToppings = newSelectedToppings.filter( e => e);
     render(state);
 }

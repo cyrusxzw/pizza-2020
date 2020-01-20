@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pizza Creator</title>
     <link rel="stylesheet" href="./main.css">
-    <script src="./main.js"></script>
+    <script src="./dist/bundle.js"></script>
 </head>
 <body>
     
@@ -41,55 +41,33 @@
     </div>
 
     <div class="section">
-        <h2>Pick your toppings</h2>
-        <div class="toppings">
-            <div class="topping" data-name="Anchovy" data-price="0.69">
-                <span>Anchovy</span>
-            </div>
-            <div class="topping" data-name="Bacon" data-price="0.69">
-                <span>Bacon</span>
-            </div>
-            <div class="topping" data-name="Basil" data-price="0.69">
-                <span>Basil</span>
-            </div>
-            <div class="topping" data-name="Chili" data-price="0.69">
-                <span>Chili</span>
-            </div>
-            <div class="topping" data-name="Mozzarella" data-price="0.69">
-                <span>Mozzarella</span>
-            </div>
-            <div class="topping" data-name="Mushroon" data-price="0.69">
-                <span>Mushroon</span>
-            </div>
-            <div class="topping" data-name="Olive" data-price="0.69">
-                <span>Olive</span>
-            </div>
-            <div class="topping" data-name="Onion" data-price="0.69">
-                <span>Onion</span>
-            </div>
+        <h2>Pick pizza size</h2>
+        <div class="pizza-container">
         </div>
     </div>
 
     <div class="section">
-        <h2>Ordert Summary</h2>
+        <h2>Pick your toppings</h2>
+        <div class="toppings">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Order Summary</h2>
         <ul class="summary">
-            <li>
-                <span>Pizza</span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span>$9.99</span>
-            </li>
         </ul>
         <hr>
-        <div class="total" data-total="9.99">
-            Total: $9.99
+        <div class="total">
         </div>
     </div>
 
     <div class="section">
         <button type="submit">Place order</button>
     </div>
+
+    <div class="modalContainer">
+    </div>
+
     
 </body>
 </html>

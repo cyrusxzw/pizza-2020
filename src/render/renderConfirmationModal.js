@@ -1,4 +1,7 @@
-function renderConfirmationModal(state) {
+import clearNode from '../helper/clearNode';
+import render from '../render';
+
+export default function renderConfirmationModal(state) {
     const { isDisplayModal } = state;
     const parentNode = document.querySelector('.modalContainer');
     clearNode(parentNode);

@@ -1,0 +1,25 @@
+{
+  "name": "new-pizza-master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "touch 1.txt",
+    "build": "webpack",
+    "start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyrusxzw/new-pizza.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyrusxzw/new-pizza/issues"
+  },
+  "homepage": "https://github.com/cyrusxzw/new-pizza#readme",
+  "dependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
